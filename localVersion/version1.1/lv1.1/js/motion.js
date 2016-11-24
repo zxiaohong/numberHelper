@@ -56,6 +56,9 @@ $(function(){
 		ttsAudio = "<audio id='tts_audio'>" +
 			"<source src=\"http://tts.baidu.com/text2audio?lan="+lang+"&ie=UTF-8&spd=2&text="+ ttsText +"\" type=\"audio/mpeg\">"+
 			"</audio>";
+		// ttsAudio = "<audio id='tts_audio'>" +
+		// 	"<source src=\"http: //translate.google.com/translate_tts?tl="+lang+"&q="+ ttsText +"\" type=\"audio/mpeg\">"+
+		// 	"</audio>";
 		//ttsSrc="http: //translate.google.com/translate_tts?tl="+lang+"&q="+ttsText;
 		ttsDiv.html(ttsAudio);
 		$("#tts_audio")[0].play();
