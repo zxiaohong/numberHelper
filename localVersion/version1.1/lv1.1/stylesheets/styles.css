@@ -455,6 +455,7 @@ a:hover{
     background: transparent;
     border:none;
     height:441px;
+    display: none;
 }
 .library_table {
     background: #f0f0f0;
