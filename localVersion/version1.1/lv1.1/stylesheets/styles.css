@@ -80,8 +80,6 @@ table {
 .font_common{
     font-family: 'Arial Negreta', 'Arial Normal', 'Arial';
     font-style: normal;
-    color:#fff;
-    font-size:14px;
     font-kerning: normal;
     text-align: left;
     font-weight:700;
@@ -108,6 +106,8 @@ table {
     border-bottom: 2px solid #7c7c7c;
     padding:20px 10px 14px;
     overflow: hidden;
+    color: #ffffff;
+    font-size: 14px;
 }
 
 .left_sidebar .product_logo{
@@ -121,23 +121,30 @@ table {
     float: right;
     margin-top: 5px;
 }
-.left_sidebar .product_name{
-    font-weight: 700;
-}
+
 .left_sidebar .product_version{
     font-weight: 400;
 }
 /*币种选择菜单*/
-.left_sidebar .currency{
-    margin-top: 20px;
-
+.l_menu {
+    color: #999999;
 }
-.left_sidebar #money_icon{
+
+.currency_wrap, .dateTime_wrap {
+    margin-top: 12px;
+}
+
+.current {
+    color: #ffffff;
+}
+
+#money_icon, #calendar_icon{
     float:left;
     display: inline-block;
     margin:0 10px;
 }
-.money{
+
+.money, .DateTime{
     display: inline-block;
     line-height:20px;
     font-size: 16px;
@@ -160,11 +167,11 @@ table {
     width: 100px;
     height: auto;
     text-align: right;
-    color:#999;
+    font-size: 14px;
     overflow: hidden;
 }
-.left_sidebar .money_list li{
-    margin-bottom: 14px;
+.left_sidebar .money_list li {
+    margin-bottom: 6px;
     color:#999;
 }
 .left_sidebar .money_list a{
