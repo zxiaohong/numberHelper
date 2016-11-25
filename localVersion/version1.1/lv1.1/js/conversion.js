@@ -153,11 +153,12 @@ $(function(){
 		var parent = $(this).parent().parent();
 		var customInput = parent.find(".custom_input_l");
 		var customResult = parent.find(".custom_input_r");
+		var customInputVal = customInput.val().trim();
 		count=0;
-		if(customInput.val().length > 0){
-			index = customInput.val().indexOf("=");
-			customChar = customInput.val().substring(1,index);//被替换字符
-			customTar = customInput.val().substring(index+1,customInput.val().length-1);//替换字符
+		if (customInputVal.length > 0) {
+			index = customInputVal.indexOf("=");
+			customChar = customInputVal.substring(1, index);//被替换字符
+			customTar = customInputVal.substring(index + 1, customInput.val().length - 1);//替换字符
 			reg = new RegExp(customChar,'g');//.replace()方法默认只替换第一次出现的字符，忽略后面相同的字符，将被替换内容定义为正则表达式，可以全部替换
 			customResult.val($("#numToChar").text().replace(reg,customTar));
 			//替换成功后样式调整
