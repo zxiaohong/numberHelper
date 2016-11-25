@@ -12,6 +12,7 @@ $(function(){
 	//console.log(historyRecord);
 	//简体中文 大写数字	 大写金额
 	function showCNY(num){
+		//noinspection JSUnresolvedVariable
 		numTChar= Nzh.cn.encodeB(num);
 		numTMoney= Nzh.cn.toMoney(num);
 		$("#numToChar").text(numTChar);
@@ -107,10 +108,15 @@ $(function(){
 				$(".right_main").css("display", "block");
 				conversionHistory.css("display", "none");
 			}
-			if($("#number").val().length>0){
-				submit();
-				customOutput();
+			if ($(".custom_area").css("display") === "block") {
+				if ($("#number").val().length > 0) {
+					submit();
+					customOutput();
+				}
+			} else if ($(".library_area").css("display") === "block") {
+				loadLibrary();
 			}
+			
 		});
 	
 	
@@ -139,7 +145,8 @@ $(function(){
 		//表单下方自定义条目
 		$(".custom_info span").text(count);
 	}
-	//点击每行的 ✔️ 执行自定义输出
+	
+	//点击每行的 ✔️ 执行自定义输出  同时增加下方计数器
 	$(".fa-check").click(function(){
 		var oResult;
 		var reg,index,customTar,customChar;
@@ -161,7 +168,7 @@ $(function(){
 			parent.find(".tooltips").remove();
 		}
 		//表单下方自定义条目
-		//计数器++
+		//计数器++   自定义了几条
 		oResult = $(".custom_input_r").slice(1);
 		oResult.each(function(){
 			if($(this).val().length>0){
@@ -244,39 +251,38 @@ $(function(){
 	$(".fa-trash-o").click(function(){
 		showConfirm();
 	});
-	//1.1版本新增 library数据管理
-		
-	$(".libraryTab").click(function(){
-		var lanMode = $(".money-subtitle").text();
-		var url= "https://github.com/Romanysoft/Ref_LAB/blob/master/apps/NumberHelper/db/lib.data.money.format.json/libraryResult.aspx?";
-		$(".custom_area").hide();
-		$(".custom_info").hide();
-		$(".library_area").show();
+	
+	//1.1版本新增 library数据管理  根据币种显示当前币种的library
+	function loadLibrary() {
+		var lanMode = $(".money-subtitle").text(); //获取当前币种
+		var tbody = $(".library_table").find("tbody");
+		tbody.empty();
 		//加载 library  管理库
-		//https://github.com/Romanysoft/Ref_LAB/blob/master/apps/NumberHelper/db/lib.data.money.format.json
-		//https://raw.githubusercontent.com/Romanysoft/Ref_LAB/master/apps/NumberHelper/db/lib.data.money.format.json
 		$.ajax({
-			url:url,
-			type:'GET',
-			dataType:"jsonp",
-			jsonp:"callback",
-			jsonpCallback:'libraryHandler',
-			// contentType:"application/json;charset=utf-8",
-			success:function(json){
+			url: "https://raw.githubusercontent.com/Romanysoft/Ref_LAB/master/apps/NumberHelper/db/lib.data.money.format.json",
+			type: 'GET',
+			dataType: "json",
+			success: function (json) {
 				var data = json.data;
-				var tbody = $(".library_table").find(tbody);
-				$.each(data,function(index,item){
-					if(item.Mode === lanMode){
-						tbody.append("<tr><td class='l_mode'>item.Mode</td><td class='l_format'>item.Format</td><td class='l_example'>item.Example</td></tr>")
+				$.each(data, function (index, item) {
+					if (item.Mode === lanMode) {
+						tbody.append("<tr><td class='l_mode'>" + item.Mode + "</td><td class='l_format'>" + item.Format + "</td><td class='l_example'>" + item.Example + "</td></tr>")
 					}
 				})
 			},
-			error:function(err){
+			error: function (err) {
 				console.log(err);
 			}
 		})
 		
+	}
+	$(".libraryTab").click(function(){
+		$(".custom_area").hide();
+		$(".custom_info").hide();
+		$(".library_area").show();
+		loadLibrary();
 	});
+	
 	$(".customTab").click(function(){
 		$(".custom_area").show();
 		$(".custom_info").show();

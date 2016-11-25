@@ -44,7 +44,7 @@ textarea {
 }
 /* 去掉各Table  cell 的边距并让其边重合 */
 table {
-    border-collapse: separate;
+    border-collapse: collapse;
     border-spacing: 0;
     position: relative;
     -webkit-border-radius:5px;
@@ -452,18 +452,18 @@ a:hover{
 }
 /*自定义管理库 library*/
 .library_area{
-    background: transparent;
     border:none;
-    height:441px;
     display: none;
 }
 .library_table {
-    background: #f0f0f0;
+    background: #ffffff;
     width: 96.33%;
-    height:420px;
     margin: 10px auto;
     border:none;
     text-align: center;
+    color: #333333;
+    font-size: 13px;
+    font-weight: normal;
 }
 .library_area tr{
     width:100%;
@@ -476,7 +476,8 @@ a:hover{
     font-weight: 700;
     font-size: 14px;
 }
-.library_area th,td{
+
+.library_area th, .library_area td{
     border: 1px solid #6599fc;
 }
 .library_table .l_mode,.l_format{
@@ -509,10 +510,10 @@ a:hover{
 }
 .table_title{
     width:100%;
-    height:40px;
-    background:-webkit-linear-gradient(180deg, rgba(4, 244, 63, 1) 0%, rgba(18, 232, 75, 1) 2%, rgba(48, 244, 101, 1) 97%, rgba(112, 244, 147,1) 100%);
-    background:-moz-linear-gradient(180deg, rgba(4, 244, 63, 1) 0%, rgba(18, 232, 75, 1) 2%, rgba(48, 244, 101, 1) 97%, rgba(112, 244, 147,1) 100%);
-    background:linear-gradient(180deg, rgba(4, 244, 63, 1) 0%, rgba(18, 232, 75, 1) 2%, rgba(48, 244, 101, 1) 97%, rgba(112, 244, 147,1) 100%);
+    height: 40px;
+    background: -webkit-linear-gradient(180deg, rgba(30, 218, 118, 1) 0%, rgba(51, 218, 139, 1) 2%, rgba(96, 216, 163, 1) 97%, rgba(174, 219, 193, 1) 100%);
+    background: -moz-linear-gradient(180deg, rgba(30, 218, 118, 1) 0%, rgba(51, 218, 139, 1) 2%, rgba(96, 216, 163, 1) 97%, rgba(174, 219, 193, 1) 100%);
+    background: linear-gradient(180deg, rgba(30, 218, 118, 1) 0%, rgba(51, 218, 139, 1) 2%, rgba(96, 216, 163, 1) 97%, rgba(174, 219, 193, 1) 100%);
     border:none;
     border-radius:0;
     -moz-box-shadow:none;
@@ -543,7 +544,8 @@ a:hover{
     width:100%;
     margin:0 auto;
 }
-.table  th,td{
+
+.table th, .table td{
     border:solid #add9c0;
     border-width:0 0 2px 0;
     padding:5px;

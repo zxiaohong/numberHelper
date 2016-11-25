@@ -97,7 +97,7 @@ $(function(){
 			$(".copy-m-tips").fadeOut(3000);
 		});
 	});
-	//点击custom区域左侧input框激活，显示icon
+	//点击custom区域左侧input框激活，显示icon 显示输入格式提示
 	$(".custom_input_l").click(function(){
 		var tooltips;
 		var parent = $(this).parent();
