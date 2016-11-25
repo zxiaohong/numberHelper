@@ -36,22 +36,33 @@
                     <div class="product_version "><p>Ver 1.0</p></div>
                 </div>
             </div> <!--产品信息结束-->
-            <!--币种切换菜单-->
-            <div class="currency  font_common clearfloat">
-                <div>
-                    <i id="money_icon" class="fa fa-money fa-2x" aria-hidden="true"></i>
-                    <span class="money font_common">Money</span>
-                    <span class="direct_arror font_common">
-                        <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
-                        <i class="fa fa-angle-down fa-2x" aria-hidden="true" ></i>
-                    </span>
+            <!--菜单部分-->
+            <div class="l_menu clearfloat font_common">
+                <!--币种切换菜单-->
+                <div class="clearfloat currency_wrap">
+                    <div class="currency_menu current">
+                        <i id="money_icon" class="fa fa-money fa-2x font_common" aria-hidden="true"></i>
+                        <span class="money font_common">Money</span>
+                        <span class="direct_arror font_common">
+                            <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+                            <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <ul class="money_list font_common">
+                        <li class="menu_list"><a href="javascript:void(0);" class="active">CNY</a></li>
+                        <li class="menu_list"><a href="javascript:void(0);">HKY</a></li>
+                        <li class="menu_list"><a href="javascript:void(0);">JPY</a></li>
+                    </ul>
+                </div><!-- 币种切换菜单结束-->
+                <!--时间日期-->
+                <div class="dateTime_wrap">
+                    <div class="calendar_menu">
+                        <i id="calendar_icon" class="fa fa-calendar fa-2x font_common" aria-hidden="true"></i>
+                        <span class="DateTime font_common">DateTime</span>
+                    </div>
                 </div>
-                <ul class="money_list font_common">
-                    <li class="menu_list"><a href="javascript:void(0);" class="active">CNY</a></li>
-                    <li class="menu_list"><a href="javascript:void(0);">HKY</a></li>
-                    <li class="menu_list"><a href="javascript:void(0);">JPY</a></li>
-                </ul>
-            </div><!-- 币种切换菜单结束-->
+
+        </div>
         </div>
         <!--右侧主体部分-->
         <div id="right_content" class="right_content">
@@ -340,7 +351,6 @@
                 <h2 class="table_title">Conversion History</h2>
                 <div class="history_info">
                 </div>
-
             </div>
         </div>
         <!--文本转语音朗读-->
