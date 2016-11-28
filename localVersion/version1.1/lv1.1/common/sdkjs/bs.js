@@ -255,7 +255,6 @@
                     };
 
                     var returnValue = b$.pN.notice.alert($.toJSON(params));
-
                     ///Fixed: 根据Electron及本地引擎的区别来处理返回的值
                     if (b$.pIsUseElectron) {
                         return returnValue;
@@ -292,7 +291,12 @@
 
                     return b$.pN.notice.notify($.toJSON(params));
                 } else {
-                    alert(jsonObj.message);
+	                var r = confirm(jsonObj.message);
+	                if (r === true) {
+		                cb && cb();
+	                } else {
+		                return;
+	                }
                 }
             },
 
