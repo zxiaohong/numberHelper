@@ -283,7 +283,7 @@ $(function(){
 		tbody.empty();
 		//加载 library  管理库
 		$.ajax({
-			url: "data/data.json", //"https://raw.githubusercontent.com/Romanysoft/Ref_LAB/master/apps/NumberHelper/db/lib.data.money.format.json",
+			url: "https://raw.githubusercontent.com/Romanysoft/Ref_LAB/master/apps/NumberHelper/db/lib.data.money.format.json",
 			type: 'GET',
 			dataType: "json",
 			success: function (json) {
