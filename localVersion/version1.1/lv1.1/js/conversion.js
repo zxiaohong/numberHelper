@@ -238,19 +238,42 @@ $(function(){
 	});
 	
 	//1.1版本新增清除历史记录
-	function showConfirm(){
-		var r = confirm("确定清除所有历史记录？");
-		if(r == true){
-			historyRecord=[];
-			window.localStorage.clear();
-			readHistory();
-			$(".fa-trash-o").css("visibility","hidden");
-		}else{
-			return
-		}
+	function clearStorage(cb) {
+		historyRecord = [];
+		window.localStorage.clear();
+		cb && cb();
 	}
+	
+	function hideTrash(cb) {
+		$(".fa-trash-o").css("visibility", "hidden");
+		cb && cb();
+	}
+	
+	// function showConfirm(){
+	
+	// var r = confirm("Are you to clear all history records？");
+	// if(r == true){
+	// 	historyRecord=[];
+	// 	window.localStorage.clear();
+	// 	readHistory();
+	// 	$(".fa-trash-o").css("visibility","hidden");
+	// }else{
+	// 	return
+	// }
+	// }
 	$(".fa-trash-o").click(function(){
-		showConfirm();
+		// showConfirm();
+		var params = {
+			message: "Are you to clear all history records?",
+			title: "Information"
+		};
+		BS.b$.Notice.notify(params, function () {
+			clearStorage(function () {
+				hideTrash(function () {
+					readHistory();
+				})
+			})
+		});
 	});
 	
 	//1.1版本新增 library数据管理  根据币种显示当前币种的library
