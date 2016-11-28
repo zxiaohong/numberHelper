@@ -461,6 +461,7 @@ a:hover{
 .library_area{
     border:none;
     display: none;
+    overflow-y: auto;
 }
 .library_table {
     background: #ffffff;
@@ -471,7 +472,6 @@ a:hover{
     color: #333333;
     font-size: 13px;
     font-weight: normal;
-    overflow-y: auto;
 }
 .library_area tr{
     width:100%;
