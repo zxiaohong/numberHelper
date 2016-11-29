@@ -127,21 +127,23 @@ $(function(){
 	var count;
 	function customOutput(){
 		var reg,index,customTar,customChar;
-		var customInput = $(".custom_input_l").slice(1);
-		var customResult = $(".custom_input_r").slice(1);
+		var customInput = $(".custom_input_l");
+		var customResult = $(".custom_input_r");
 		count = 0;
 		customInput.each(function(){
-			var $this = $(this);
-			if($this.val().length > 0) {
-				index = $this.val().indexOf("=");
-				customChar = $this.val().substring(1, index);//被替换字符
-				customTar = $this.val().substring(index + 1, $this.val().length - 1);//替换字符
+			if ($(this).val().length > 0) {
+				index = $(this).val().indexOf("=");
+				customChar = $(this).val().substring(1, index);//被替换字符
+				customTar = $(this).val().substring(index + 1, $(this).val().length - 1);//替换字符
 				reg = new RegExp(customChar, 'g');//.replace()方法默认只替换第一次出现的字符，忽略后面相同的字符，将被替换内容定义为正则表达式，可以全部替换
-				$this.parent().find(".custom_input_r").text($("#numToChar").text().replace(reg, customTar));
+				$(this).parent().find(".custom_input_r").text($("#numToChar").text().replace(reg, customTar));
+			} else {
+				$(this).parent().find(".custom_input_r").text("");
 			}
 		});
 		customResult.each(function(){
-			if ($(this).text().length > 0) {
+			console.log($(this).text());
+			if (!!$(this).text()) {
 				count++;
 			}
 		});
@@ -170,7 +172,7 @@ $(function(){
 		}
 		//表单下方自定义条目
 		//计数器++   自定义了几条
-		oResult = $(".custom_input_r").slice(1);
+		oResult = $(".custom_input_r");
 		oResult.each(function(){
 			if ($(this).text().length > 0) {
 				count++;
@@ -184,14 +186,11 @@ $(function(){
 		var parent = $(this).parent().parent();
 		var customInput = parent.find(".custom_input_l");
 		var customResult = parent.find(".custom_input_r");
-		//oResult = $(".custom_input_r").slice(1);
-		//oResult.each(function(){
 		if (customResult.text().length > 0) {
 				count--;
 			}
-		//});
 		$(this).parent().css("visibility","hidden");
-		customInput.val("").css({background: 'transparent', border: "none", 'margin-top': "3px"});
+		customInput.val("").css({background: 'transparent', border: "none", "margin-top": "3px"});
 		customResult.text("");
 		parent.find(".tooltips").remove();
 		$(".custom_info span").text(count);
