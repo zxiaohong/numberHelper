@@ -191,7 +191,7 @@ $(function(){
 			}
 		//});
 		$(this).parent().css("visibility","hidden");
-		customInput.val("").css({background: 'transparent', border: "none", margin: "3px"});
+		customInput.val("").css({background: 'transparent', border: "none", 'margin-top': "3px"});
 		customResult.text("");
 		parent.find(".tooltips").remove();
 		$(".custom_info span").text(count);
