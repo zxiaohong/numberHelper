@@ -376,6 +376,9 @@ a:hover{
     height:30px;
     line-height: 30px;
     margin: 3px auto;
+    font-weight: 700;
+    font-size: 14px;
+    color: #000000;
 }
 .row{
     background: #f0f0f0;
@@ -390,7 +393,6 @@ a:hover{
 }
 .result{
     text-align: center;
-    color:#000;
 }
 .tooltips{
     display: block;
