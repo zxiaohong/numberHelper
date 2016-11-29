@@ -98,13 +98,14 @@ $(function(){
 		});
 	});
 	//点击custom区域左侧input框激活，显示icon 显示输入格式提示
+	var tooltips;
 	$(".custom_input_l").click(function(){
-		var tooltips;
+		
 		var parent = $(this).parent();
 		if(parent.children().hasClass("tooltips")){
 			parent.find(".tooltips").remove();
 		}
-		tooltips = "<span class='tooltips'>Please enter the replacement content, such as '①' replace '壹', enter <i class='higTips'>%壹=①%</i></span>";
+		tooltips = "<span class='tooltips'>Please enter correct replacement, such as <i class='higTips'>%壹=①%</i></span>";
 		
 		parent.append(tooltips);
 		$(this).css({
@@ -114,7 +115,19 @@ $(function(){
 		parent.find('.custom_input').css('margin-top','2px');
 		parent.find('.custom_input_r').css({'height':'26','line-height':'26'});
 		parent.find('.custom_check').css("visibility","visible");
-	});
+	}).blur(function () {
+		var checkReg = /^%.+=.+%$/;
+		var customInputVal = $(this).val();
+		var parent = $(this).parent();
+		if (!checkReg.test(customInputVal)) {
+			if (parent.children().hasClass("tooltips")) {
+				parent.find(".tooltips").remove();
+			}
+			tooltips = "<span class='tooltips'><span style='font-weight: 700;color:#ff0000;'>Invalid value !</span> Please enter correct replacement, such as <i class='higTips'>%壹=①%</i></span>";
+			parent.append(tooltips);
+		}
+	})
+	
 });
 
 

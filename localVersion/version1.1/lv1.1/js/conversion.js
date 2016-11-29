@@ -130,6 +130,7 @@ $(function(){
 		customInput.each(function(){
 			var $this = $(this);
 			if($this.val().length > 0) {
+				
 				index = $this.val().indexOf("=");
 				customChar = $this.val().substring(1, index);//被替换字符
 				customTar = $this.val().substring(index + 1, $this.val().length - 1);//替换字符
@@ -148,8 +149,7 @@ $(function(){
 	
 	//点击每行的 ✔️ 执行自定义输出  同时增加下方计数器
 	$(".fa-check").click(function(){
-		var oResult;
-		var reg,index,customTar,customChar;
+		var oResult, reg, index, customTar, customChar;
 		var parent = $(this).parent().parent();
 		var customInput = parent.find(".custom_input_l");
 		var customResult = parent.find(".custom_input_r");
@@ -228,52 +228,34 @@ $(function(){
 	$(".fa-history").click(function(){
 		var conversionHistory = $(".conversion_history");
 		if(conversionHistory.css("display") === "none"){
-			$(".right_main").css("display","none");
-			conversionHistory.css("display","block");
+			$(".right_main").hide();
+			conversionHistory.show();
 			readHistory();
 		}else{
-			$(".right_main").css("display","block");
-			conversionHistory.css("display","none");
+			$(".right_main").show();
+			conversionHistory.hide();
+			$(".fa-trash-o").css("visibility", "hidden");
 		}
 	});
 	
 	//1.1版本新增清除历史记录
-	function clearStorage(cb) {
-		historyRecord = [];
-		window.localStorage.clear();
-		cb && cb();
-	}
 	
-	function hideTrash(cb) {
-		$(".fa-trash-o").css("visibility", "hidden");
-		cb && cb();
-	}
-	
-	// function showConfirm(){
-	
-	// var r = confirm("Are you to clear all history records？");
-	// if(r == true){
-	// 	historyRecord=[];
-	// 	window.localStorage.clear();
-	// 	readHistory();
-	// 	$(".fa-trash-o").css("visibility","hidden");
-	// }else{
-	// 	return
-	// }
-	// }
 	$(".fa-trash-o").click(function(){
-		// showConfirm();
 		var params = {
-			message: "Are you to clear all history records?",
-			title: "Information"
+			message: 'Are you sure to clear all history records?',
+			title: 'Confirm Information',
+			buttons: ['OK', 'Cancel'],
+			alertType: "Alert"
 		};
-		BS.b$.Notice.notify(params, function () {
-			clearStorage(function () {
-				hideTrash(function () {
-					readHistory();
-				})
-			})
-		});
+		var returnValue = BS.b$.Notice.alert(params);
+		if (returnValue === 0) {
+			$(".fa-trash-o").css("visibility", "hidden");
+			historyRecord = [];
+			window.localStorage.clear();
+			readHistory();
+		} else {
+			return;
+		}
 	});
 	
 	//1.1版本新增 library数据管理  根据币种显示当前币种的library
@@ -288,6 +270,7 @@ $(function(){
 			dataType: "json",
 			success: function (json) {
 				var data = json.data;
+				
 				$.each(data, function (index, item) {
 					if (item.Mode === lanMode) {
 						tbody.append("<tr><td class='l_mode'>" + item.Mode + "</td><td class='l_format'>" + item.Format + "</td><td class='l_example'>" + item.Example + "</td></tr>")

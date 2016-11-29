@@ -291,12 +291,7 @@
 
                     return b$.pN.notice.notify($.toJSON(params));
                 } else {
-	                var r = confirm(jsonObj.message);
-	                if (r === true) {
-		                cb && cb();
-	                } else {
-		                return;
-	                }
+	                alert(jsonObj.message);
                 }
             },
 
