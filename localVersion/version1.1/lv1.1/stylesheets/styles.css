@@ -105,7 +105,9 @@ table {
     height:50px;
     border-bottom: 2px solid #7c7c7c;
     padding:20px 10px 14px;
+    text-overflow: clip;
     overflow: hidden;
+    white-space: nowrap;
     color: #ffffff;
     font-size: 14px;
 }
@@ -120,10 +122,16 @@ table {
     position: relative;
     float: right;
     margin-top: 5px;
+    text-overflow: clip;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .left_sidebar .product_version{
     font-weight: 400;
+    text-overflow: clip;
+    overflow: hidden;
+    white-space: nowrap;
 }
 /*币种选择菜单*/
 .l_menu {
@@ -132,6 +140,9 @@ table {
 
 .currency_wrap, .dateTime_wrap {
     margin-top: 12px;
+    text-overflow: clip;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .current {
@@ -399,16 +410,27 @@ a:hover{
     color: #f00000;
     background-color: #ffff00;
 }
+
+.custom_input {
+    display: inline-block;
+    float: left;
+    width: 44.5%;
+    margin-top: 3px;
+    height: 24px;
+    line-height: 24px;
+    background: transparent;
+    border: none;
+    white-space: nowrap;
+    overflow-x: auto;
+}
 .custom_input_l{
     color: #333;
     margin-right: 0.5%;
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
 }
 .custom_input_r{
     text-align: center;
-    color:#666;
+    color: #333333;
+    font-weight: normal;
 }
 .custom_check{
     display: inline-block;
@@ -420,16 +442,7 @@ a:hover{
     line-height: 30px;
     visibility:hidden;
 }
-.custom_input{
-    display: inline-block;
-    float: left;
-    width:44.5%;
-    margin-top:3px;
-    height:24px;
-    line-height: 24px;
-    background: transparent;
-    border: none;
-}
+
 
 .fa-check{
     float: left;
@@ -477,9 +490,6 @@ a:hover{
     line-height: 28px;
 }
 
-/*.library_area  tbody tr:nth-child(2n){*/
-/*background: #95ffbe ;*/
-/*}*/
 .library_area thead {
     background: #1fca6a;
     color: #000;
@@ -558,7 +568,7 @@ a:hover{
 .table th, .table td{
     border:solid #add9c0;
     border-width:0 0 2px 0;
-    padding:5px;
+    padding: 10px;
 }
 .index,.mode{
     width:7.2%;
@@ -567,10 +577,12 @@ a:hover{
 ._num{
     width:24.6%;
     text-align: left;
+    word-break: break-all;
 }
 .convResult{
     width:34.1%;
     text-align: left;
+    word-break: break-all;
 }
 /* 验证表单的错误信息*/
 .err-message:nth-child(3){

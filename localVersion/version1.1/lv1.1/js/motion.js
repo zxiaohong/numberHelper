@@ -106,14 +106,12 @@ $(function(){
 			parent.find(".tooltips").remove();
 		}
 		tooltips = "<span class='tooltips'>Please enter correct replacement, such as <i class='higTips'>%壹=①%</i></span>";
-		
 		parent.append(tooltips);
 		$(this).css({
 			background:'#fff',
-			border:"1px solid #ccc"
+			border: "1px solid #ccc",
+			'margin-top': '2px'
 		});
-		parent.find('.custom_input').css('margin-top','2px');
-		parent.find('.custom_input_r').css({'height':'26','line-height':'26'});
 		parent.find('.custom_check').css("visibility","visible");
 	}).blur(function () {
 		var checkReg = /^%.+=.+%$/;
@@ -123,7 +121,7 @@ $(function(){
 			if (parent.children().hasClass("tooltips")) {
 				parent.find(".tooltips").remove();
 			}
-			tooltips = "<span class='tooltips'><span style='font-weight: 700;color:#ff0000;'>Invalid value !</span> Please enter correct replacement, such as <i class='higTips'>%壹=①%</i></span>";
+			tooltips = "<span class='tooltips'><span style='font-weight:700;color:#ff0000;'>Invalid value !</span> Please enter correct replacement, such as <i class='higTips'>%壹=①%</i></span>";
 			parent.append(tooltips);
 		}
 	})
