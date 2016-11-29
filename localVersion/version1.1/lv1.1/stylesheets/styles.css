@@ -353,12 +353,11 @@ a:hover{
     margin:0 auto;
     width:95.33%;
     height:411px;
+    border: 1px solid #7c7c7c;
+    background: #ffffff;
 }
 /*用户自定义*/
-.custom_area{
-    border:1px solid #7c7c7c;
-    background: #fff;
-}
+
 .head_row{
     position: relative;
     background: #fff ;
@@ -434,7 +433,7 @@ a:hover{
 
 .fa-check{
     float: left;
-    color: rgb(18, 138, 83);
+    color: #128a53;
 
 }
 .fa-times{
@@ -459,14 +458,13 @@ a:hover{
 }
 /*自定义管理库 library*/
 .library_area{
-    border:none;
     display: none;
     overflow-y: auto;
 }
 .library_table {
     background: #ffffff;
     width: 96.33%;
-    margin: 10px auto;
+    margin: 20px auto;
     border:none;
     text-align: center;
     color: #333333;
@@ -478,15 +476,19 @@ a:hover{
     height: 28px;
     line-height: 28px;
 }
-.library_area thead{
-    background: #c1c1c1;
+
+/*.library_area  tbody tr:nth-child(2n){*/
+/*background: #95ffbe ;*/
+/*}*/
+.library_area thead {
+    background: #1fca6a;
     color: #000;
     font-weight: 700;
     font-size: 14px;
 }
 
-.library_area th, .library_area td{
-    border: 1px solid #6599fc;
+.library_area th, .library_area td {
+    border: 1px solid #1fca6a;
 }
 .library_table .l_mode,.l_format{
     width:20%;
