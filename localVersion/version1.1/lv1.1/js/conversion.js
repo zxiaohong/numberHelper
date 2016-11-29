@@ -108,15 +108,18 @@ $(function(){
 				$(".right_main").css("display", "block");
 				conversionHistory.css("display", "none");
 			}
+			
 			if ($(".custom_area").css("display") === "block") {
 				if ($("#number").val().length > 0) {
 					submit();
 					customOutput();
 				}
 			} else if ($(".library_area").css("display") === "block") {
+				if ($("#number").val().length > 0) {
+					submit();
+				}
 				loadLibrary();
 			}
-			
 		});
 	
 	
