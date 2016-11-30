@@ -475,6 +475,7 @@ a:hover{
 .library_area{
     display: none;
     overflow-y: auto;
+    position: relative;
 }
 .library_table {
     background: #ffffff;
@@ -595,6 +596,22 @@ position: absolute;
     font-size: 12px;
     font-weight: normal;
     font-family: 'Arial Negreta', 'Arial Normal', 'Arial';
+}
+
+/*loading效果*/
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+    width: 100px;
+    height: 100px;
+    z-index: 10000;
+    background: #ffffff;
+    opacity: 0.8;
+    border: none;
+    display: none;
 }
 
 
