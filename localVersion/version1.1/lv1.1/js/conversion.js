@@ -279,9 +279,6 @@ $(function(){
 						tbody.append("<tr><td class='l_mode'>" + item.Mode + "</td><td class='l_format'>" + item.Format + "</td><td class='l_example'>" + item.Example + "</td></tr>")
 					}
 				})
-			},
-			error: function (err) {
-				console.log(err);
 			}
 		})
 		
