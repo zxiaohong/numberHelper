@@ -266,9 +266,14 @@ $(function(){
 			url: "https://raw.githubusercontent.com/Romanysoft/Ref_LAB/master/apps/NumberHelper/db/lib.data.money.format.json",
 			type: 'GET',
 			dataType: "json",
+			beforeSend: function () {
+				$(".loading").show();
+			},
+			complete: function () {
+				$(".loading").hide();
+			},
 			success: function (json) {
 				var data = json.data;
-				
 				$.each(data, function (index, item) {
 					if (item.Mode === lanMode) {
 						tbody.append("<tr><td class='l_mode'>" + item.Mode + "</td><td class='l_format'>" + item.Format + "</td><td class='l_example'>" + item.Example + "</td></tr>")
