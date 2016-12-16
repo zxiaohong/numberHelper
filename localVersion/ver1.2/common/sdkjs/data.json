@@ -1125,19 +1125,19 @@
     "timeZoneOffset": "Diferencia horaria actual respecto al huso horario UTC"
   },
   "su": {
-    "no": "",
-    "key": "",
-    "val": "",
-    "comment": "",
-    "fullYear": "",
-    "fullMonth": "",
-    "fullDay": "",
-    "fullHours": "",
-    "fullMinutes": "",
-    "fullSeconds": "",
-    "millSeconds": "",
-    "fullDate": "",
-    "timeZoneOffset": ""
+    "no": "No.",
+    "key": "key",
+    "val": "val",
+    "comment": "comment",
+    "fullYear": "The Year",
+    "fullMonth": "The Month",
+    "fullDay": "The Day of the week(from 0-6)",
+    "fullHours": "The Hours",
+    "fullMinutes": "The Minutes",
+    "fullSeconds": "The Seconds",
+    "milliSeconds": "The milliSeconds",
+    "fullDate": "The Day of the month(from 0-31)",
+    "timeZoneOffset": "Current time difference from UTC time zone"
   },
   "sw": {
     "no": "index",
