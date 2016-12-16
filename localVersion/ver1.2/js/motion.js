@@ -164,11 +164,21 @@ $(function () {
 	
 	
 	//dateTime模块 点击右上角active按钮购买激活插件
+    var $iap = window["APP_IAP"];
+	var curPluginID = BS.b$.App.getAppId() + ".plugin.DateTime.Format"; /// 定义当前的商品或者插件ID
+
+	/// 启动订阅，用于程序启动或者恢复购买的时候，异步来检测指定商品的数量，根据数量来更新界面
+	$iap.bind(curPluginID, function(){
+		console.log("call bind function");
+		var curCount = $iap.getCount(curPluginID);
+		if(curCount > 0){
+			//TODO: 说明这个插件已经激活了，你下面要编写对应的界面
+			alert("这里要求代码说明这个插件已经激活了，你下面要编写对应的界面");
+			//
+		}
+	});
+
 	$(".active_btn").click(function () {
-		var $iap = window["APP_IAP"];
-
-		var curPluginID = BS.b$.App.getAppId() + ".plugin.DateTime.Format"; /// 定义当前的商品或者插件ID
-
 		var params = {
 			message: 'Only '+ $iap.getPrice(curPluginID) +',Do you want to unlock it?',
 			title: 'Confirm Information',
@@ -176,7 +186,7 @@ $(function () {
 			alertType: "Alert"
 		};
 		var returnValue = BS.b$.Notice.alert(params);//弹窗
-		if (returnValue === 0) {//"确定"
+		if (returnValue === 0 || !BS.b$.pN) {//"确定"
 
 			/// 先声明一下，购买成功的操作，和购买失败后的操作
 			var fn_BuySuccess = function(productId, obj){
@@ -205,35 +215,7 @@ $(function () {
 	});
 	
 	$(".restore_btn").click(function () {
-		var $iap = window["APP_IAP"];
-
-		var curPluginID = BS.b$.App.getAppId() + ".plugin.DateTime.Format"; /// 定义当前的商品或者插件ID
-
-		/// 先声明一下，恢复购买成功的操作，和恢复购买失败后的操作
-		var fn_resotreSuccess = function(productArray){
-			/**
-			 * 恢复成功后，得到商品的ID及数量，根据这些信息更新界面相关的元素
-			 */
-			if($.RTYUtils.isArray(productArray)){
-				$.each(productArray, function(index, productObj){
-					var productId = productObj.productIdentifier; /// 商品或者插件ID
-					var quantity = productObj.quantity;           /// 商品或者插件的已经购买的数量
-
-					if(productId == curPluginID){
-						if(quantity > 0){
-							//TODO: 更新界面相关元素
-							alert("编写代码,更新界面相关元素!");
-						}
-					}
-				});
-			}
-		};
-
-		var fn_resotreFail = function(){
-
-		};
-
-		$iap.restore(fn_resotreSuccess, fn_resotreFail);
+		$iap.restore();
 	});
 	
 	
@@ -403,6 +385,8 @@ $(function () {
 	
 	//点击setting按钮将时间拆分
 	$(".setting").click(setTable);
+
+	///
 });
 
 

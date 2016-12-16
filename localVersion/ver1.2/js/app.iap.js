@@ -32,10 +32,14 @@
 		
 		var _u = {
 
+            subscriber:[], // 订阅这
+
             /**
              * 初始化产品的IAP
+             * @param  productIds  商品的ID列表， 例如： b$.App.getAppId() + ".plugin.DateTime.Format"
              */
-            init:function(){ 
+            init:function(productIds){ 
+                var t$ = this;
                 /**
                  * Step1: 先要检测是否开启IAP？
                  * Step2：要告知系统哪些插件是可用的
@@ -44,11 +48,40 @@
                 var enable = b$.IAP.getEnable(); // 检测是否可以开启IAP
                 if(enable){
                     b$.IAP.enableIAP({
-                        productIds: [b$.App.getAppId() + ".plugin.DateTime.Format"],
+                        productIds: productIds || [],
                     }, function(obj){
-
+							try {
+								if ($.isPlainObject(obj)) {
+									var productInfoList = obj.info, notifyType = obj.notifyType;
+									if (notifyType == b$.IAP.MessageType["ProductRequested"] 
+                                        || notifyType == b$.IAP.MessageType["ProductsPaymentQueueRestoreCompleted"]) {
+                                        /// 轮询处理，第一次产品注册到IAP机制中，或者恢复购买来告知订阅者    
+                                        $.each(t$.subscriber, function(i, forker){
+                                            $.each(productInfoList, function(i, product){
+                                                if(product.productIdentifier == forker.key){
+                                                    forker.cb && forker.cb();
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            }catch(e){}
                     });                    
                 }
+            },
+
+
+            /**
+             * 绑定订阅
+             *  @param  productId  商品或者插件的ID， 例如： b$.App.getAppId() + ".plugin.DateTime.Format"
+             *  @param  cb 回调
+             */
+            bind: function(productId, cb){
+                var t$ = this;
+                t$.subscriber.push({
+                    key:productId || "**unkown**",
+                    cb: cb || function(){}
+                });
             },
 
             /**
@@ -115,10 +148,6 @@
 		
 		window["APP_IAP"] = _u;
 
-        //-----------------------------------------------------------------------------------------------------------------
-        $(document).ready(function () {
-            _u.init();
-        });
 	}($));
 	
 	
