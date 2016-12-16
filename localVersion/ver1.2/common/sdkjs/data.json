@@ -1125,19 +1125,19 @@
     "timeZoneOffset": "Diferencia horaria actual respecto al huso horario UTC"
   },
   "su": {
-    "no": "",
-    "key": "",
-    "val": "",
-    "comment": "",
-    "fullYear": "",
-    "fullMonth": "",
-    "fullDay": "",
-    "fullHours": "",
-    "fullMinutes": "",
-    "fullSeconds": "",
-    "millSeconds": "",
-    "fullDate": "",
-    "timeZoneOffset": ""
+    "no": "No.",
+    "key": "key",
+    "val": "val",
+    "comment": "comment",
+    "fullYear": "The Year",
+    "fullMonth": "The Month",
+    "fullDay": "The Day of the week(from 0-6)",
+    "fullHours": "The Hours",
+    "fullMinutes": "The Minutes",
+    "fullSeconds": "The Seconds",
+    "milliSeconds": "The milliSeconds",
+    "fullDate": "The Day of the month(from 0-31)",
+    "timeZoneOffset": "Current time difference from UTC time zone"
   },
   "sw": {
     "no": "index",
@@ -1326,12 +1326,12 @@
     "comment": "באַמערקונג",
     "fullYear": "די יאָר",
     "fullMonth": "די חודש",
-    "fullDay": "די טאָג פון די וואָך (0-6)",
+    "fullDay": "(די טאָג פון די וואָך (0-6",
     "fullHours": "די שעה",
     "fullMinutes": "די מינוט",
     "fullSeconds": "די סעקונדעס",
     "millSeconds": "די Milli סעקונדעס",
-    "fullDate": "דער טאָג פון דעם חודש (0-31)",
+    "fullDate": "(דער טאָג פון דעם חודש (0-31",
     "timeZoneOffset": "קראַנט צייַט חילוק פון וטק זאָנע"
   },
   "yo": {

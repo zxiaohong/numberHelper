@@ -164,6 +164,7 @@ $(function () {
 	
 	
 	//dateTime模块 点击右上角active按钮购买激活插件
+
     var $iap = window["APP_IAP"];
 	var curPluginID = BS.b$.App.getAppId() + ".plugin.DateTime.Format"; /// 定义当前的商品或者插件ID
 
@@ -179,43 +180,85 @@ $(function () {
 	});
 
 	$(".active_btn").click(function () {
+		var $iap = window["APP_IAP"];
+		
+		var curPluginID = BS.b$.App.getAppId() + ".plugin.DateTime.Format"; /// 定义当前的商品或者插件ID
+
 		var params = {
-			message: 'Only '+ $iap.getPrice(curPluginID) +',Do you want to unlock it?',
+			message: 'Only ' + $iap.getPrice(curPluginID) + ',Do you want to unlock it?',
 			title: 'Confirm Information',
 			buttons: ['Ok', 'Cancel'],
 			alertType: "Alert"
 		};
 		var returnValue = BS.b$.Notice.alert(params);//弹窗
+
 		if (returnValue === 0 || !BS.b$.pN) {//"确定"
 
+
 			/// 先声明一下，购买成功的操作，和购买失败后的操作
-			var fn_BuySuccess = function(productId, obj){
+			var fn_BuySuccess = function (productId, obj) {
 				var curCount = $iap.getCount(productId);
 				// 购买成功后，检查现在的数量，符合激活标准的发，界面元素做相应变化
-				if(curCount > 0){
+				if (curCount > 0) {
 					$(".date_disable").css({opacity: '1.0', cursor: "auto"});
 					$(".date_time_ipt").removeProp('disabled');
 					$('.setting').removeProp('disabled');
-					$(".locale_select").removeProp('disabled');	
-				}			
+					$(".locale_select").removeProp('disabled');
+					$(".active_btn").prop("disabled", "disabled").css({'background': '#999'});
+				}
 			};
-
-			var fn_BuyFail = function(productId, obj) {
-				// 
+			
+			var fn_BuyFail = function (productId, obj) {
+				//
 				// TODO：购买失败后的处理
-			}
-
+				var params = {					message: 'Failed purchase ！',
+					title: 'Information',
+					buttons: ['Ok'],
+					alertType: "Alert"
+				};
+				BS.b$.Notice.alert(params);
+			};
+			
 			////////////////////////////////////////////////////////////////////
 			/// 启动购买
 			$iap.buy(curPluginID, 1, fn_BuySuccess, fn_BuyFail);
-
+			
 		} else {
 			return;
 		}
 	});
 	
 	$(".restore_btn").click(function () {
-		$iap.restore();
+
+		var $iap = window["APP_IAP"];
+		
+		var curPluginID = BS.b$.App.getAppId() + ".plugin.DateTime.Format"; /// 定义当前的商品或者插件ID
+		
+		/// 先声明一下，恢复购买成功的操作，和恢复购买失败后的操作
+		var fn_resotreSuccess = function (productArray) {
+			/**
+			 * 恢复成功后，得到商品的ID及数量，根据这些信息更新界面相关的元素
+			 */
+			if ($.RTYUtils.isArray(productArray)) {
+				$.each(productArray, function (index, productObj) {
+					var productId = productObj.productIdentifier; /// 商品或者插件ID
+					var quantity = productObj.quantity;           /// 商品或者插件的已经购买的数量
+					
+					if (productId == curPluginID) {
+						if (quantity > 0) {
+							//TODO: 更新界面相关元素
+							alert("编写代码,更新界面相关元素!");
+						}
+					}
+				});
+			}
+		};
+		
+		var fn_resotreFail = function () {
+			
+		};
+		
+		$iap.restore(fn_resotreSuccess, fn_resotreFail);
 	});
 	
 	
@@ -388,9 +431,3 @@ $(function () {
 
 	///
 });
-
-
-
-	
-		
-

@@ -9,7 +9,13 @@ ul,li{
     list-style: none;
 }
 a{
+    color: #999999;
     text-decoration:none;
+}
+
+a:hover {
+    color: #ffffff;
+    text-decoration: none;
 }
 
 /* 重设 HTML5 标签, IE 需要在 js 中 createElement(TAG) */
@@ -34,6 +40,10 @@ body,button,input,select,textarea {
     line-height: 22px;
 }
 
+input {
+    border: none;
+}
+
 /*input,select,textarea {*/
     /*font-size: 100%;*/
 /*}*/
@@ -51,6 +61,7 @@ table {
     -moz-border-radius:5px;
     border-radius:5px;
 }
+
 /*清除浮动*/
 .clearfloat{
     zoom:1;
@@ -100,9 +111,10 @@ table {
       box-shadow:none;
 }
 /*产品信息*/
-.left_sidebar .product_info{
-    width:87%;
-    height:50px;
+.left_sidebar .product_info {
+    position: relative;
+    width: 87%;
+    height:90px;
     border-bottom: 2px solid #7c7c7c;
     padding:20px 10px 14px;
     text-overflow: clip;
@@ -112,14 +124,14 @@ table {
     font-size: 14px;
 }
 
-.left_sidebar .product_logo{
-    position: relative;
+.left_sidebar .product_logo {
+    /*position: relative;*/
     float: left;
     width:25%;
     height:50px;
 }
-.left_sidebar .product_text{
-    position: relative;
+.left_sidebar .product_text {
+    /*position: relative;*/
     float: right;
     margin-top: 5px;
     text-overflow: clip;
@@ -133,16 +145,39 @@ table {
     overflow: hidden;
     white-space: nowrap;
 }
+
+/*restore按钮*/
+.left_sidebar .restore_btn {
+    position: absolute;
+    top: 90px;
+    margin: 0 auto;
+    width: 80px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background: #169bff;
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 7px;
+    border: none;
+}
 /*币种选择菜单*/
 .l_menu {
     color: #999999;
 }
 
-.currency_wrap, .dateTime_wrap {
+.currency_menu, .calendar_menu {
     margin-top: 12px;
     text-overflow: clip;
     overflow: hidden;
     white-space: nowrap;
+}
+
+.currency_menu:hover, .calendar_menu:hover {
+    color:#fff;
 }
 
 .current {
@@ -152,7 +187,7 @@ table {
 #money_icon, #calendar_icon{
     float:left;
     display: inline-block;
-    margin:0 10px;
+    margin: 4px 10px 0;
 }
 
 .money, .DateTime{
@@ -161,7 +196,8 @@ table {
     font-size: 16px;
     padding-top: 8px;
 }
-.left_sidebar .direct_arror{
+
+.left_sidebar .direct_arrow{
     float: right;
     display: inline-block;
     width:20px;
@@ -170,10 +206,12 @@ table {
     font-weight:bold;
     text-align: right;
 }
-.left_sidebar .direct_arror .fa-angle-right{
+
+.left_sidebar .direct_arrow .fa-angle-right{
     display: none;
 }
-.left_sidebar .money_list{
+
+.money_list, .date_list{
     margin-top: 12px;
     width: 100px;
     height: auto;
@@ -181,20 +219,18 @@ table {
     font-size: 14px;
     overflow: hidden;
 }
-.left_sidebar .money_list li {
+
+.date_list {
+    display: none;
+}
+
+.money_list li, .date_list li {
     margin-bottom: 6px;
-    color:#999;
+    color: #999999;
 }
-.left_sidebar .money_list a{
-    color:#999;
-    text-decoration:none;
-}
-a:hover{
-    color:#fff;
-    text-decoration:none;
-}
-.left_sidebar .money_list .active{
-    color:#fff;
+
+.active {
+    color: #ffffff; @import
     text-decoration: none;
 }
 
@@ -231,23 +267,37 @@ a:hover{
 }
 .right_top_bar .list_icon{
     float: left;
-    margin:10px;
+    margin:7px 10px;
     color: #128a53;
     display: inline-block;
 }
-.right_top_bar .history{
+ .history{
     float: right;
     padding:9px 12px 4px 0;
-    color: #128a53;
-    display: inline-block;
-}
+     color: #1fca6a;
+ }
+
+.active_btn {
+    float: right;
+    width: 90px;
+    height: 29px;
+    background: #1fca6a;
+    color: #ffffff;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    margin: 6px 12px 4px 0;
+    text-align: center;
+ }
 /*1.1版本新增清除历史记录 */
  .fa-trash-o{
     font-weight: bold;
     margin-right: 10px;
-}
- /*右侧主题部分订栏标题*/
-.right_top_bar .money-title {
+ }
+
+/*右侧主题部分顶栏标题*/
+.right_top_bar .money-title, .right_top_bar .date-title {
+    position: relative;
     display: inline-block;
 }
 /*输入框*/
@@ -614,4 +664,94 @@ position: absolute;
     display: none;
 }
 
+/*dateTime 右侧部分 */
+.date_disable {
+    z-index: 3;
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: no-drop;
+}
 
+.date_form {
+    width: 95.33%;
+    height: 25px;
+    margin: 25px 2.34% 12px;
+}
+
+.date_time_ipt {
+    width: 25.76%;
+    height: 25px;
+    line-height: 25px;
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    box-sizing: border-box;
+    padding-left: 2px;
+}
+
+.setting {
+    width: 90px;
+    height: 25px;
+    background: #032626;
+    color: #ffffff;
+    font-weight: 700;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    margin-left: 2.42%;
+    margin-right: 16.81%;
+}
+
+.locale_select {
+    border: 1px solid #cccccc;
+    -moz-appearance: button;
+    -webkit-appearance: button;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    width: 16.69%;
+    background: #ffffff;
+    height: 25px;
+    line-height: 25px;
+    box-sizing: border-box;
+    padding-left: 2px;
+}
+
+.date_format {
+    width: 95.33%; /*96.61%*/
+    height: 638px;
+    margin: 25px 2.34% 12px;
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border: 1px solid #cccccc;
+    overflow: scroll;
+}
+
+.date_table {
+    margin: 1.25% 10px;
+    width: 97.5%;
+    border: 1px solid #cccccc;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+.date_table thead th, .date_table td {
+    border: 1px solid #999999;
+    text-align: center;
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.date_table tr td:nth-of-type(2), .date_table tr td:nth-of-type(4) {
+    padding-left: 2px;
+    text-align: left;
+}
+
+.date_table tbody {
+    font-weight:400;
+}

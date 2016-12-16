@@ -265,7 +265,6 @@
 		}
 		return str;
 	}
-	
 	//中文转阿拉伯数字
 	function unCL(cnnumb) {
 		var result = cnnumb.split(this.other.charAt(1));//将cnmunb从点（點或.）分割成字符数组 整数部分和小数部分
