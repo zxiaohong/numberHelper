@@ -25,7 +25,6 @@ $(function () {
 		};
 		historyRecord.push(historyRecordItem);//存储转换记录
 	}
-	
 	//繁体中文 繁体数字 繁体金额
 	function showHKY(num) {
 		numTChar = Nzh.hk.encodeB(num);
@@ -57,7 +56,6 @@ $(function () {
 		};
 		historyRecord.push(historyRecordItem);//存储转换记录
 	}
-	
 	//执行转换的函数
 	function submit() {
 		var num = $("#number").val();
@@ -77,7 +75,6 @@ $(function () {
 		customOutput();
 		window.localStorage.localHistory = JSON.stringify(historyRecord);//将转换记录存到缓存中
 	}
-	
 	//表单验证
 	$.validator.addMethod("numeric", function (value, element) {
 		var regs = /(^([+-])?0*(\d+)(\.(\d+))?$)|(^([+-])?0*(\d+)(\.(\d+))?e(([+-])?(\d+))$)|(^1\d$)/;
@@ -110,7 +107,7 @@ $(function () {
 		if (conversionHistory.css("display") === "block") {
 			$(".right_main").css("display", "block");
 			conversionHistory.css("display", "none");
-		}
+			}
 		
 		if ($(".custom_area").css("display") === "block") {
 			if ($("#number").val().length > 0) {
@@ -122,7 +119,7 @@ $(function () {
 				submit();
 			}
 			loadLibrary();
-		}
+			}
 	});
 	
 	

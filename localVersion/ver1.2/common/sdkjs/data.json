@@ -1326,12 +1326,12 @@
     "comment": "באַמערקונג",
     "fullYear": "די יאָר",
     "fullMonth": "די חודש",
-    "fullDay": "די טאָג פון די וואָך (0-6)",
+    "fullDay": "(די טאָג פון די וואָך (0-6",
     "fullHours": "די שעה",
     "fullMinutes": "די מינוט",
     "fullSeconds": "די סעקונדעס",
     "millSeconds": "די Milli סעקונדעס",
-    "fullDate": "דער טאָג פון דעם חודש (0-31)",
+    "fullDate": "(דער טאָג פון דעם חודש (0-31",
     "timeZoneOffset": "קראַנט צייַט חילוק פון וטק זאָנע"
   },
   "yo": {
