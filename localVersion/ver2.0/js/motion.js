@@ -2,6 +2,20 @@
  * Created by Eva on 2016/11/15.
  */
 $(function () {
+	//点击list图标 左侧边栏显示隐藏
+	var leftSidebar = $("#left_sidebar");
+	var rightContent = $("#right_content");
+	$(".list_icon").click(function () {
+		if (leftSidebar.css("width") == "168px") {
+			rightContent.animate({width: '1024px'}, "fast");
+			leftSidebar.animate({width: '0px'}, "fast");
+		} else {
+			leftSidebar.animate({width: '168px'}, "fast");
+			rightContent.animate({width: '856px'}, "fast");
+		}
+	});
+	
+	
 	// 币种切换菜单显示隐藏
 	var faAngleRight, faAngleDown, listBox, menuWrap, currentMenu;
 	var menuTit = $(".menu_title");
@@ -12,6 +26,7 @@ $(function () {
 		});
 		$(".transfer_content").eq($this.id).show().siblings().hide();
 		$(".conversion_history").hide();
+		$(".fa-trash-o").hide();
 		$(".right_main").show();
 		if ($(this).hasClass("current")) {
 			faAngleRight = $(this).find(".fa-angle-right");
@@ -52,30 +67,7 @@ $(function () {
 		}
 	});
 	
-	//点击list图标 左侧边栏显示隐藏
-	var leftSidebar = $("#left_sidebar");
-	var rightContent = $("#right_content");
-	$(".list_icon").click(function () {
-		if (leftSidebar.css("width") == "168px") {
-			rightContent.animate({width: '1024px'}, "fast");
-			leftSidebar.animate({width: '0px'}, "fast");
-		} else {
-			leftSidebar.animate({width: '168px'}, "fast");
-			rightContent.animate({width: '856px'}, "fast");
-		}
-	});
 	
-	//点击币种切换菜单币种列表 切换转换模式
-	var currencyL = $(".menu_list a");
-	currencyL.click(function () {
-		$(".menu_list").find("a[class='active']").removeClass('active');
-		
-		$(this).addClass("active");
-		if ($(this).parent().parent().hasClass("money_list")) {
-			var currencyTxt = $(this).text();
-			$(".money-subtitle").text(currencyTxt);
-		}
-	});
 	//文本语音朗读
 	var ttsDiv = $("#bdtts_div_id");
 	var ttsAudio, ttsText, lang, language;
