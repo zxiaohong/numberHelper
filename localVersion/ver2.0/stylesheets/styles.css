@@ -182,6 +182,10 @@ table {
     white-space: nowrap;
 }
 
+.menu_list a {
+    display: block;
+}
+
 .currency_menu:hover, .calendar_menu:hover {
     color: #ffffff;
 }
