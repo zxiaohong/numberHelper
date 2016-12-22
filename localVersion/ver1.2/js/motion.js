@@ -174,8 +174,11 @@ $(function () {
 		var curCount = $iap.getCount(curPluginID);
 		if(curCount > 0){
 			//TODO: 说明这个插件已经激活了，你下面要编写对应的界面
-			alert("这里要求代码说明这个插件已经激活了，你下面要编写对应的界面");
-			//
+			$(".date_disable").css({opacity: '1.0', cursor: "auto"});
+			$(".date_time_ipt").removeProp('disabled');
+			$('.setting').removeProp('disabled');
+			$(".locale_select").removeProp('disabled');
+			$(".active_btn").hide();
 		}
 	});
 
