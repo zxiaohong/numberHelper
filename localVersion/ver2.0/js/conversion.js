@@ -9,6 +9,9 @@ $(function () {
 	//获取历史记录
 	var historyRecord = window.localStorage.localHistory ? JSON.parse(window.localStorage.localHistory) : [];
 	var historyRecordItem;
+	var conversionHistory = $(".conversion_history");
+	var rightMain = $(".right_main");
+	var trash = $(".fa-trash-o");//历史记录页删除按钮
 	//console.log(historyRecord);
 	//简体中文 大写数字	 大写金额
 	function showCNY(num) {
@@ -101,12 +104,28 @@ $(function () {
 			submit();
 		}
 	});
+	//点击币种切换菜单币种列表 切换转换模式
+	var currencyL = $(".menu_list a");
+	currencyL.click(function () {
+		$(".menu_list").find("a[class='active']").removeClass('active');
+		
+		$(this).addClass("active");
+		if ($(this).parent().parent().hasClass("money_list")) {
+			var currencyTxt = $(this).text();
+			$(".money-subtitle").text(currencyTxt);
+		}
+	});
 	//点击币种切换菜单执行转行 同时根据自定义规则输出自定义结果
 	$(".menu_list").click(function () {
-		var conversionHistory = $(".conversion_history");
+		$(this).addClass("active").siblings().removeClass('active');
+		if ($(this).parent().parent().hasClass("money_list")) {
+			var currencyTxt = $(this).text();
+			$(".money-subtitle").text(currencyTxt);
+		}
 		if (conversionHistory.css("display") === "block") {
-			$(".right_main").css("display", "block");
-			conversionHistory.css("display", "none");
+			rightMain.show();
+			conversionHistory.hide();
+			trash.hide();
 			}
 		
 		if ($(".custom_area").css("display") === "block") {
@@ -143,7 +162,7 @@ $(function () {
 			}
 		});
 		customResult.each(function () {
-			console.log($(this).text());
+			//console.log($(this).text());
 			if (!!$(this).text()) {
 				count++;
 			}
@@ -203,10 +222,9 @@ $(function () {
 		var historyInfo = $(".history_info");
 		var information = "";
 		var tableContent = "<tr><th class='index'>Serial</th><th class='mode'>Mode</th><th class='_num'>Number</th><th class='convResult'>NumToChar</th><th class='convResult'>NumToMoney</th></tr>";
-		var trash = $(".fa-trash-o");
 		if (historyRecord.length > 0) {
-			if (trash.css("visibility") === "hidden") {
-				trash.css("visibility", "visible");
+			if (trash.css("display") === "none") {
+				trash.show();
 			}
 			if (historyRecord.length > 50) {
 				sIndex = historyRecord.length - 50;
@@ -219,28 +237,28 @@ $(function () {
 			//console.log(tableDom);
 			historyInfo.html(tableDom);
 		} else {
-			trash.css("visibility", "hidden");
+			trash.hide();
 			information = "<p class='info'>There is no conversion record yet.</p>";
 			historyInfo.html(information);
 		}
 	}
 	
 	$(".fa-history").click(function () {
-		var conversionHistory = $(".conversion_history");
 		if (conversionHistory.css("display") === "none") {
-			$(".right_main").hide();
+			rightMain.hide();
 			conversionHistory.show();
+			trash.show();
 			readHistory();
 		} else {
-			$(".right_main").show();
+			rightMain.show();
 			conversionHistory.hide();
-			$(".fa-trash-o").css("visibility", "hidden");
+			trash.hide();
 		}
 	});
 	
 	//1.1版本新增清除历史记录
 	
-	$(".fa-trash-o").click(function () {
+	trash.click(function () {
 		var params = {
 			message: 'Are you sure to clear all history records?',
 			title: 'Confirm Information',
@@ -249,7 +267,7 @@ $(function () {
 		};
 		var returnValue = BS.b$.Notice.alert(params);
 		if (returnValue === 0) {
-			$(".fa-trash-o").css("visibility", "hidden");
+			trash.hide();
 			historyRecord = [];
 			window.localStorage.clear();
 			readHistory();
