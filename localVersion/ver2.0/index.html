@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NumberHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="keywords"
+          content="NumberHelper,number to simplified Chinese,traditional Chinese，Japanese;number to money"/>
+    <meta name="description"
+          content="NumberHelper is a digital to text converter ，which can convert  number to  simplified and traditional Chinese, Japanese  and corresponding money writing."/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="common/jquery-ui-1.12.1.custom/jquery-ui.css">
+    <link rel="stylesheet" href="common/jQuery-Timepicker-Addon-master/dist/jquery-ui-timepicker-addon.css">
+    <!--<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>-->
+    <link rel="stylesheet" href="stylesheets/rs-fix.css">
+</head>
+<body>
+
+<div id="main" class="clearfloat">
+    <!--左侧边栏-->
+    <div id="left_sidebar" class="left_sidebar">
+        <!--产品信息-->
+        <div class="product_info clearfloat">
+            <div class="product_logo">
+                <img src="images/logo_64.png" alt="product-logo" style="width: 42px;height:50px;">
+            </div>
+            <div class="product_text font_common">
+                <div class="product_name "><p>NumberHelper</p></div>
+                <div class="product_version "><p>Ver 2.0</p></div>
+            </div>
+            <input class="restore_btn" value="Restore" type="button">
+        </div> <!--产品信息结束-->
+        <!--菜单部分-->
+        <div class="l_menu clearfloat font_common">
+            <!--币种切换菜单-->
+            <div class="currency_menu">
+                <div class="menu_title current">
+                    <i id="money_icon" class="fa fa-money fa-2x font_common" aria-hidden="true"></i>
+                    <span class="money font_common">Money</span>
+                    <span class="direct_arrow font_common">
+                                <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+                                <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i>
+                            </span>
+                </div>
+                <ul class="money_list list_box">
+                    <li class="menu_list"><a href="javascript:void(0);" class="active">CNY</a></li>
+                    <li class="menu_list"><a href="javascript:void(0);">HKY</a></li>
+                    <li class="menu_list"><a href="javascript:void(0);">JPY</a></li>
+                </ul>
+
+            </div><!-- 币种切换菜单结束-->
+            <!--时间日期-->
+            <div class="calendar_menu">
+                <div class="menu_title">
+                    <i id="calendar_icon" class="fa fa-calendar fa-2x font_common" aria-hidden="true"></i>
+                    <span class="DateTime font_common">DateTime</span>
+                    <span class="direct_arrow font_common">
+                            <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+                            <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i>
+                        </span>
+                </div>
+                <ul class="date_list  list_box">
+                    <li class="menu_list"><a href="javascript:void(0);" class="active">Format</a></li>
+                    <li class="menu_list" style="display: none;"><a href="javascript:void(0);">Calc</a></li>
+                    <li class="menu_list" style="display: none;"><a href="javascript:void(0);">Compare</a></li>
+                    <li class="menu_list" style="display: none;"><a href="javascript:void(0);">World Time</a></li>
+                    <li class="menu_list" style="display: none;"><a href="javascript:void(0);">Timer</a></li>
+                    <li class="menu_list" style="display: none;"><a href="javascript:void(0);">Program</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <!--右侧主体部分-->
+    <div id="right_content" class="right_content">
+        <div class="money_transfer transfer_content">
+            <!--top-bar-->
+            <div class="right_top_bar">
+                <div class="list_icon"><i class="fa fa-list fa-2x" aria-hidden="true"></i></div>
+                <p class="money-title">Money——<span class="money-subtitle">CNY</span></p>
+                <div class="history">
+                    <i class="fa fa-trash-o fa-2x" aria-hidden="true" style="visibility:hidden;"></i>
+                    <i class="fa fa-history fa-2x" aria-hidden="true"></i>
+                </div>
+            </div>
+            <! --top-bar end -->
+            <div class="right_main font_common">
+                <!--数字输入框-->
+                <form class="oNumber" id="oNumber">
+                    <label class="number_label">Number</label>
+                    <input name="number" type="text" id="number" class="number_input" value=""/>
+                    <input id="convert_button" class="convert_button" type="submit" value="Convert">
+                </form>
+
+                <!--结果输出-->
+                <div class="num-cash" id="num-t-cash">
+                    <div class="yen_icon">
+                        <i class="fa fa-jpy fa-4x" aria-hidden="true"></i>
+                    </div>
+                    <div id="numToChar" class="cash_text"></div>
+                    <div class="cs_icon" id="oprIcon">
+                        <i class="fa fa-files-o fa-2x" aria-hidden="true" data-clipboard-target="#numToChar"
+                           id="copyTIcon"></i>
+                        <i class="fa fa-volume-up fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <span class="copy-t-tips"></span>
+                </div>
+                <div class="num-cash" id="num-m-cash">
+                    <div class="yen_icon">
+                        <i class="fa fa-jpy fa-4x" aria-hidden="true"></i>
+                    </div>
+                    <div id="numToMoney" class="cash_text cash_yen"></div>
+                    <div class="cs_icon" id="doIcon">
+                        <i class="fa fa-files-o fa-2x" aria-hidden="true" data-clipboard-target="#numToMoney"
+                           id="copyMIcon"></i>
+                        <i class="fa fa-volume-up fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <span class="copy-m-tips"></span>
+                </div><!--结果输出结束-->
+                <!--自定义输出-->
+                <!--自定义输出tab-->
+                <div class="custom_title font_common">
+                    <span class="tab customTab">Custom</span>
+                    <span class="tab libraryTab">Library</span>
+                    <a href="https://romanysoft.gitbooks.io/manual-for-numberhelper/content/custom_format_for_money.html"
+                       target="_blank"><i class="fa fa-question-circle-o fa-2x" aria-hidden="true"></i></a>
+                </div>
+                <!--自定义输出区域-->
+                <div class="custom custom_area">
+                    <div class="head_row clearfloat">
+                        <span class="custom_input ">Format</span>
+                        <span class="custom_input  result">Result</span>
+                        <span class="custom-check"></span>
+                    </div>
+                    <div class="custom_result">
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="" placeholder="%壹=①%">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                        <div class="row clearfloat">
+                            <input type="text" class="custom_input custom_input_l" value="">
+                            <span class="custom_input custom_input_r"></span>
+                            <span class="custom_check">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <p class="font_common custom_info"><span>0</span> of 20 Custom Format</p>
+                <!--library 管理库-->
+                <div class="custom  library_area clearfloat">
+                    <div class="loading"><img src='./images/loading1.gif' style='width:100px;height:100px;'/></div>
+                    <table class="library_table clearfloat">
+                        <thead>
+                        <tr>
+                            <th>Mode</th>
+                            <th>Format</th>
+                            <th>Example</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--历史记录展示-->
+            <div class="conversion_history">
+                <h2 class="table_title">Conversion History</h2>
+                <div class="history_info"></div>
+            </div>
+            <!--文本转语音朗读-->
+            <div id="bdtts_div_id">
+                <!--<audio id="tts_audio_id">Your browser does not support the audio tag.-->
+                <!--<source id="tts_source_id" src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text=" type="audio/mpeg">-->
+                <!--</audio>-->
+            </div>
+        </div>
+        <div class="date_transfer transfer_content" style="display: none;">
+            <div class="right_top_bar">
+                <div class="list_icon"><i class="fa fa-list fa-2x" aria-hidden="true"></i></div>
+                <p class="date-title font_common">DateTime</p>
+                <input type="button" class="active_btn font_common" value="Active">
+            </div>
+            <! --top-bar end -->
+
+            <div class="right_main font_common">
+                <div class="date_disable">
+                    <div class="date_form">
+                        <label>DateTime:</label>
+                        <input type="text" id="dateTimePicker" class="date_time_ipt" name="date_time" disabled>
+                        <input type="button" class="setting" value="Setting" disabled>
+
+                        <label for="locale_select" class="locale">Locale:</label>
+                        <span class="locale_select_wrap">
+                                <select name="locale_select" class="locale_select" id="locale_select" disabled>
+                                    <option value="en">English</option>
+                                </select>
+                            <!--<i class="fa fa-caret-down" aria-hidden="true"></i>-->
+                            </span>
+                        <span class="dateTips"></span>
+                    </div>
+                    <div class="date_format">
+                        <table class="date_table">
+                            <thead>
+                            <tr>
+                                <th id="idx">No.</th>
+                                <th id="key">Key</th>
+                                <th id="val">Value</th>
+                                <th id="comment">Comment</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>FullYear</td>
+                                <td id="fullYear"></td>
+                                <td class="comment">The Year</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>FullMonth</td>
+                                <td id="fullMonth"></td>
+                                <td class="comment">The Month</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>FullDate</td>
+                                <td id="fullDate"></td>
+                                <td class="comment">The Day of the month(from 0-31)</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>FullHours</td>
+                                <td id="fullHours"></td>
+                                <td class="comment">The Hours</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>FullMinutes</td>
+                                <td id="fullMinutes"></td>
+                                <td class="comment">The Minutes</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>FullSeconds</td>
+                                <td id="fullSeconds"></td>
+                                <td class="comment">The Seconds</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>FullMilliSecond</td>
+                                <td id="milliSeconds"></td>
+                                <td class="comment">The Millisecond</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>FullDay</td>
+                                <td id="fullDay"></td>
+                                <td class="comment">The Day of the week(from 0-6)</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>TimezoneOffset</td>
+                                <td id="timezoneOffset"></td>
+                                <td class="comment">Current time difference from UTC time zone
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>UTCYear</td>
+                                <td id="UTCYear"></td>
+                                <td class="comment"></td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>UTCMonth</td>
+                                <td id="UTCMonth"></td>
+                                <td class="comment"></td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>UTCDate</td>
+                                <td id="UTCDate"></td>
+                                <td class="comment"></td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td>UTCDay</td>
+                                <td id="UTCDay"></td>
+                                <td class="comment"></td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td>UTCHours</td>
+                                <td id="UTCHours"></td>
+                                <td class="comment"></td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td>UTCMinutes</td>
+                                <td id="UTCMinutes"></td>
+                                <td class="comment"></td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td>UTCSeconds</td>
+                                <td id="UTCSeconds"></td>
+                                <td class="comment"></td>
+                            </tr>
+                            <tr>
+                                <td>17</td>
+                                <td>UTCMilliSeconds</td>
+                                <td id="UTCMilliseconds"></td>
+                                <td class="comment"></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="common/jquery-1.12.3.min.js"></script>
+<script src="common/nzh.js"></script>
+<script src="common/clipboard.js-master/dist/clipboard.min.js"></script>
+<script src="common/jquery-validation-1.15.0/dist/jquery.validate.min.js"></script>
+<script src="common/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="common/jQuery-Timepicker-Addon-master/dist/jquery-ui-timepicker-addon.js"></script>
+<script src="common/jQuery-Timepicker-Addon-master/dist/i18n/jquery-ui-timepicker-addon-i18n.js"></script>
+<script src="common/sdkjs/util.js" type="text/javascript"></script>
+<script src="common/sdkjs/bs.js" type="text/javascript"></script>
+<script src="common/sdkjs/test.js"></script>
+<script src="js/app.iap.js"></script>
+
+
+<script type="text/javascript" src="js/motion.js"></script>
+<script type="text/javascript" src="js/conversion.js"></script>
+<script type="text/javascript" src="js/app.main.js"></script>
+</body>
+</html>
